@@ -3,7 +3,9 @@ import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet, Alert, Pan
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { postFavorite, postComment } from '../redux/ActionCreators';
+//import { postFavorite, postComment } from '../redux/ActionCreators';
+import { postComment} from '../redux/ActionCreators';
+import { postFavorite } from '../redux/ActionCreators';
 import * as Animatable from 'react-native-animatable';
 
 
@@ -26,6 +28,8 @@ function RenderCampsite(props) {
     const {campsite} = props;
 
     const recognizeDrag = ({dx}) => (dx < -200) ? true : false;
+
+    const recognizeComment = ({dx}) => (dx < 200) ? true : false;
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -50,10 +54,21 @@ function RenderCampsite(props) {
                     { cancelable: false }
                 );
             }
+
+            else if (recognizeComment(gestureState)) {
+                   
+                
+                props.onShowModal();
+                    
+                        
+            }
+
             return true;
         }
     });
 
+
+    
 
     if (campsite) {
         return (
@@ -154,9 +169,8 @@ class CampsiteInfo extends Component {
 
     handleComment(campsiteId) {
         //console.log(JSON.stringify(this.state));
-        this.toggleModal();
-        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text)
-                
+        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.comment)
+        this.toggleModal();        
     };
 
    
