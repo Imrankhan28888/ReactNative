@@ -23,6 +23,8 @@ const mapDispatchToProps = {
     
 };
 
+
+
 function RenderCampsite(props) {
    
     const {campsite} = props;
@@ -169,7 +171,7 @@ class CampsiteInfo extends Component {
 
     handleComment(campsiteId) {
         //console.log(JSON.stringify(this.state));
-        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.comment)
+        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text)
         this.toggleModal();        
     };
 
@@ -226,7 +228,7 @@ class CampsiteInfo extends Component {
                         placeholder='Author'
                         leftIcon={{ type: 'font-awesome', name: 'user-o' }}
                         leftIconContainerStyle={{paddingRight:10}}
-                        onChangeText={(rating)=>this.setState({rating: rating})}
+                        onChangeText={(author)=>this.setState({author: author})}
                         value
 
                     />
@@ -235,7 +237,7 @@ class CampsiteInfo extends Component {
                         placeholder='Commnent'
                         leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
                         leftIconContainerStyle={{paddingRight:10}}
-                        onChangeText={(rating)=>this.setState({rating: rating})}
+                        onChangeText={(text)=>this.setState({text: text})}
                         value
                     /> 
 
